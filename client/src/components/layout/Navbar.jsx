@@ -1,88 +1,92 @@
 import React from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
-import { CheckSquare, PlusCircle, BarChart2, LogOut, User } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { LayoutDashboard, PlusCircle, BarChart3, User, LogOut } from 'lucide-react';
+import { useAuth } from '../../hooks/useAuth';
+import Dock from '../UI/Dock';
 
-export const Navbar = () => {
-  const { user, logout } = useAuth();
+const Navbar = () => {
   const navigate = useNavigate();
-  const location = useLocation();
+  const { user, logout } = useAuth();
 
   const handleLogout = () => {
     logout();
     navigate('/');
   };
 
-  const isActive = (path) => {
-    return location.pathname === path;
-  };
+  const navItems = [
+    {
+      icon: <LayoutDashboard size={22} color="#ffffff" />,
+      label: 'Dashboard',
+      onClick: () => navigate('/dashboard'),
+    },
+    {
+      icon: <PlusCircle size={22} color="#ffffff" />,
+      label: 'Add Habit',
+      onClick: () => navigate('/add-habit'),
+    },
+    {
+      icon: <BarChart3 size={22} color="#ffffff" />,
+      label: 'Progress',
+      onClick: () => navigate('/progress'),
+    },
+  ];
 
-  // If not logged in, Navbar is not rendered (handled in App.jsx or here)
-  if (!user) return null;
+  const profileItems = [
+    {
+      icon: <User size={22} color="#ffffff" />,
+      label: user?.name || 'Profile',
+      onClick: () => { },
+    },
+    {
+      icon: <LogOut size={22} color="#ffffff" />,
+      label: 'Logout',
+      onClick: handleLogout,
+    },
+  ];
 
   return (
-    <nav className="hidden md:block sticky top-0 z-40 bg-brand-bg/85 backdrop-blur-md border-b border-brand-border/60">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Brand Logo */}
-        <Link to="/dashboard" className="flex items-center space-x-2.5 focus:outline-none">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-accent to-brand-accentCyan flex items-center justify-center shadow-glow">
-            <CheckSquare size={16} className="text-brand-bg stroke-[2.5]" />
-          </div>
-          <span className="font-sans font-extrabold text-base tracking-wide text-brand-textPrimary bg-clip-text">
-            HABIT<span className="text-brand-accent font-light">PULSE</span>
-          </span>
-        </Link>
-
-        {/* Navigation Links */}
-        <div className="flex items-center space-x-8">
-          <Link
-            to="/dashboard"
-            className={`flex items-center space-x-1.5 text-sm font-medium transition-colors focus:outline-none ${
-              isActive('/dashboard') ? 'text-brand-accent' : 'text-brand-textSecondary hover:text-brand-textPrimary'
-            }`}
-          >
-            <CheckSquare size={16} />
-            <span>Dashboard</span>
-          </Link>
-          
-          <Link
-            to="/add-habit"
-            className={`flex items-center space-x-1.5 text-sm font-medium transition-colors focus:outline-none ${
-              isActive('/add-habit') ? 'text-brand-accent' : 'text-brand-textSecondary hover:text-brand-textPrimary'
-            }`}
-          >
-            <PlusCircle size={16} />
-            <span>Add Habit</span>
-          </Link>
-
-          <Link
-            to="/progress"
-            className={`flex items-center space-x-1.5 text-sm font-medium transition-colors focus:outline-none ${
-              isActive('/progress') ? 'text-brand-accent' : 'text-brand-textSecondary hover:text-brand-textPrimary'
-            }`}
-          >
-            <BarChart2 size={16} />
-            <span>Progress</span>
-          </Link>
-        </div>
-
-        {/* User Profile & Logout */}
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2 px-3 py-1.5 bg-brand-card border border-brand-border rounded-lg">
-            <User size={14} className="text-brand-accent" />
-            <span className="text-xs font-medium text-brand-textPrimary">{user.name}</span>
-          </div>
-          
-          <button
-            onClick={handleLogout}
-            className="flex items-center space-x-1.5 px-3 py-1.5 bg-brand-border/30 hover:bg-brand-border text-brand-textSecondary hover:text-brand-textPrimary rounded-lg text-xs font-semibold transition-colors border border-brand-border/40 focus:outline-none"
-          >
-            <LogOut size={13} />
-            <span>Logout</span>
-          </button>
-        </div>
+    <header
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '0.5rem 2rem',
+        background: 'rgba(0, 0, 0, 0.3)',
+        backdropFilter: 'blur(12px)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+      }}
+    >
+      {/* Logo */}
+      <div
+        style={{ cursor: 'pointer', fontWeight: 800, fontSize: '1rem', color: '#fff', minWidth: '120px' }}
+        onClick={() => navigate('/dashboard')}
+      >
+        HABIT<span style={{ color: '#00F59B' }}>PULSE</span>
       </div>
-    </nav>
+
+      {/* Center Nav Items */}
+      <Dock
+        items={navItems}
+        panelHeight={52}
+        baseItemSize={40}
+        magnification={58}
+        distance={120}
+      />
+
+      {/* Right — Profile and Logout */}
+      <Dock
+        items={profileItems}
+        panelHeight={52}
+        baseItemSize={36}
+        magnification={50}
+        distance={100}
+      />
+    </header>
   );
 };
 

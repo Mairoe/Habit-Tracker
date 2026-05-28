@@ -18,7 +18,8 @@ import ProgressPage from './pages/ProgressPage';
 // Layout wrapper for protected pages to show navigation
 const AppLayout = () => {
   return (
-    <div className="min-h-screen bg-brand-bg text-brand-textPrimary flex flex-col pb-16 md:pb-0">
+    <div className="min-h-screen text-brand-textPrimary flex flex-col pb-16 md:pb-0"
+      style={{ paddingTop: '70px' }}>
       <Navbar />
       <main className="flex-grow">
         <Outlet />
