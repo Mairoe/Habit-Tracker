@@ -21,14 +21,14 @@ export const FeaturesSection = () => {
   ];
 
   return (
-    <section className="py-24 px-6 bg-brand-bg relative border-t border-brand-border/40">
+    <section className="py-24 px-6 relative border-t border-white/10">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-sans font-extrabold tracking-tight text-white mb-4">
             Engineered for Consistency
           </h2>
-          <p className="text-brand-textSecondary text-sm sm:text-base max-w-xl mx-auto font-light">
+          <p className="text-white/70 text-sm sm:text-base max-w-xl mx-auto font-light">
             No fluff. Just the essential data and tools you need to build long-term positive behaviors.
           </p>
         </div>
@@ -38,15 +38,15 @@ export const FeaturesSection = () => {
           {features.map((feature, idx) => (
             <div
               key={idx}
-              className="bg-brand-card border border-brand-border hover:border-brand-border/90 rounded-2xl p-8 transition-all hover:scale-[1.01] hover:shadow-glow/5 flex flex-col items-start group"
+              className="bg-white/10 backdrop-blur-sm border border-white/20 hover:border-white/40 rounded-2xl p-8 transition-all hover:scale-[1.01] flex flex-col items-start group"
             >
-              <div className="p-3 bg-brand-bg rounded-xl border border-brand-border/60 mb-6 group-hover:scale-105 transition-transform">
+              <div className="p-3 bg-white/10 rounded-xl border border-white/20 mb-6 group-hover:scale-105 transition-transform">
                 {feature.icon}
               </div>
               <h3 className="text-lg font-bold text-white mb-3 tracking-wide">
                 {feature.title}
               </h3>
-              <p className="text-brand-textSecondary text-sm font-light leading-relaxed">
+              <p className="text-white/70 text-sm font-light leading-relaxed">
                 {feature.description}
               </p>
             </div>

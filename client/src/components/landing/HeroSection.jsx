@@ -4,7 +4,7 @@ import { CheckSquare, ArrowRight } from 'lucide-react';
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-[85vh] flex flex-col items-center justify-center px-6 overflow-hidden bg-grid-pattern">
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden bg-grid-pattern">
       {/* Background Gradients */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-radial-gradient rounded-full pointer-events-none filter blur-xl"></div>
       <div className="absolute bottom-10 left-1/3 w-[300px] h-[300px] bg-radial-gradient-cyan rounded-full pointer-events-none filter blur-xl"></div>
