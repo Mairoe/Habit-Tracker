@@ -1,0 +1,72 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@theme {
+  --color-brand-bg: #0A0A0C;
+  --color-brand-card: #111115;
+  --color-brand-border: #1F1F24;
+  --color-brand-accent: #00F59B;
+  --color-brand-accentCyan: #00D8F6;
+  --color-brand-textPrimary: #F4F4F6;
+  --color-brand-textSecondary: #8F8F99;
+
+  --font-sans: 'Outfit', 'Inter', sans-serif;
+
+  --shadow-glow: 0 0 20px rgba(0, 245, 155, 0.15);
+  --shadow-glow-cyan: 0 0 20px rgba(0, 216, 246, 0.15);
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-brand-textPrimary font-sans antialiased selection:bg-brand-accent/30 selection:text-white;
+    min-height: 100vh;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0C;
+}
+::-webkit-scrollbar-thumb {
+  background: #1F1F24;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2D2D35;
+}
+
+/* Glassmorphism Background Pattern */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+.bg-radial-gradient {
+  background: radial-gradient(circle at 50% 50%, rgba(0, 245, 155, 0.08) 0%, transparent 50%);
+}
+
+.bg-radial-gradient-cyan {
+  background: radial-gradient(circle at 50% 50%, rgba(0, 216, 246, 0.08) 0%, transparent 50%);
+}
+
+/* Keyframes and Animations */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(0, 245, 155, 0.1);
+    border-color: rgba(0, 245, 155, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(0, 245, 155, 0.25);
+    border-color: rgba(0, 245, 155, 0.5);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s infinite ease-in-out;
+}
